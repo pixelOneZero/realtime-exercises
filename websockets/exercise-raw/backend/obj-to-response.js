@@ -1,7 +1,7 @@
 export default function objToResponse(obj) {
   const string = JSON.stringify(obj);
   const stringBytes = Buffer.byteLength(string);
-  // we're only doing two frames
+  // we're only doing two frames (a frame is a packet of data sent to the browser)
   const lengthByteCount = stringBytes < 126 ? 0 : 2;
   const payloadLength = lengthByteCount === 0 ? stringBytes : 126;
   const buffer = Buffer.alloc(2 + lengthByteCount + stringBytes);
